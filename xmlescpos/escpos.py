@@ -18,7 +18,7 @@ try:
 except ImportError:
     jcconv = None
 
-try: 
+try:
     import qrcode
 except ImportError:
     qrcode = None
@@ -466,7 +466,7 @@ class Escpos:
 
     def qr(self,text):
         """ Print QR Code for the provided string """
-        qr_code = qrcode.QRCode(version=4, box_size=4, border=1)
+        qr_code = qrcode.QRCode(version=4, box_size=6, border=1)
         qr_code.add_data(text)
         qr_code.make(fit=True)
         qr_img = qr_code.make_image()
@@ -474,6 +474,8 @@ class Escpos:
 
         # Convert the RGB image in printable image
         pix_line, img_size = self._convert_image(im)
+        # Center the barcode
+        self._raw(TXT_ALIGN_CT)
         # Print the image
         self._print_image(pix_line, img_size)
 

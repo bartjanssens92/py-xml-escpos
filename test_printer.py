@@ -14,7 +14,10 @@ test_temp = """
         <barcode encoding='ean13'>
             5449000000996
         </barcode>
-        <cashdraw /> 
+        <qr>
+            QR code text goes here.
+        </qr>
+        <cashdraw />
         <cut />
     </receipt>
 """
@@ -32,7 +35,7 @@ try:
     printer._raw('\x1D\x28\x47\x02\x00\x30\x04');
     printer._raw('AAAA');
     printer._raw('\x0c');
-    
+
     printer._raw('\x1c\x61\x31');
     printer._raw('BBBB');
     printer._raw('\x0c');

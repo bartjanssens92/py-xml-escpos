@@ -24,6 +24,9 @@ The following example is self-explanatory:
         <barcode encoding='ean13'>
             5449000000996
         </barcode>
+        <qr>
+            QR code text goes here.
+        </qr>
         <cashdraw /> 
         <cut />
     </receipt>
@@ -102,6 +105,13 @@ supported: `UPC-A`,`UPC-E`,`EAN13`,`EAN8`,`CODE39`,`ITF`,`NW7`.
     <barcode encoding="EAN13">
         5400113509509
     </barcode>
+
+### QR code Tags
+It is possible to include QR codes in your receipt with the `qr tag`.
+
+    <qr>
+        QR code text goes here.
+    </qr>
 
 ### Line Tag
 The `line` tag is used to quickly layout receipt lines. Its child elements

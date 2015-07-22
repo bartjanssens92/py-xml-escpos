@@ -471,8 +471,11 @@ class Escpos:
         qr_code.make(fit=True)
         qr_img = qr_code.make_image()
         im = qr_img._img.convert("RGB")
+
         # Convert the RGB image in printable image
-        self._convert_image(im)
+        pix_line, img_size = self._convert_image(im)
+        # Print the image
+        self._print_image(pix_line, img_size)
 
     def barcode(self, code, bc, width=255, height=2, pos='below', font='a'):
         """ Print Barcode """
@@ -678,6 +681,11 @@ class Escpos:
             elif elem.tag == 'barcode' and 'encoding' in elem.attrib:
                 serializer.start_block(stylestack)
                 self.barcode(strclean(elem.text),elem.attrib['encoding'])
+                serializer.end_entity()
+
+            elif elem.tag == 'qr':
+                serializer.start_block(stylestack)
+                self.qr(strclean(elem.text))
                 serializer.end_entity()
 
             elif elem.tag == 'cut':
